@@ -2,6 +2,3 @@ notable_maps
 raws/**
 maps/**
 stitcher.exe
-__pycache__
-files/stc/build
-files/stc/dist
