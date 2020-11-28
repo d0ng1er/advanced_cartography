@@ -38,3 +38,20 @@ Help me upgrade my gaming toaster:
 - Worlds are sorted by seed, and automatically tagged when they are Daily Runs or Daily Practice runs
 - When you die, AC will take a screenshot of the final frame of your life
 - If you enter a New Game +, a new seed folder is created with the appropriate tag, and the old one remains the same
+
+## Planned Features
+
+- Mod settings which allow you to control size of screenshot deadzone, behavior for multiple runs on the same seed, etc. 
+- Advanced stitch function, integration with mod GUI (stitch and view maps from the pause menu, instead of an external mode)
+- Multithreaded screenshot compression
+
+## Known Bugs
+
+Each of these already has a ticket in [issues](https://github.com/d0ng1er/advanced_cartography/issues).
+
+- Teleporting corrupts screenshot coordinates
+- Polymorphing gets counted as death (current fix is to restart the game after polymorphing to continue capturing, then combine the batch folders from each world into one of the seed folders when you want to stitch)
+
+## Special Thanks
+
+- Inspiration for this project: [Dadido3/noita-mapcap](https://github.com/Dadido3/noita-mapcap)

@@ -49,9 +49,6 @@ function OnWorldPostUpdate()
        or not ngp
        or dead
        then return
-    elseif _G.isTeleporting then
-        GamePrint('SS Disabled: Teleporting')
-        return
     elseif ngp ~= ngpcnt then
         ngpcnt = ngp
         photoPath = pathMaster(StatsGetValue('world_seed'))
