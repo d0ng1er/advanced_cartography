@@ -55,3 +55,4 @@ Each of these already has a ticket in [issues](https://github.com/d0ng1er/advanc
 ## Special Thanks
 
 - Inspiration for this project: [Dadido3/noita-mapcap](https://github.com/Dadido3/noita-mapcap)
+- This software is based in part on the work of the Independent JPEG Group
