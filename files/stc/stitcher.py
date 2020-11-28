@@ -19,6 +19,8 @@ def getPathLists():
     rawPaths = listdir('.\\raws')
     if 'desktop.ini' in rawPaths:
         rawPaths.remove('desktop.ini')
+    if 'README.md' in rawPaths:
+        rawPaths.remove('README.md')
     rawPaths = ['.\\raws\\' + i for i in rawPaths]
     rawPaths.sort(key=path.getctime, reverse=True)
     rawPaths = [i.lstrip('.\\raws\\') for i in rawPaths]
@@ -26,6 +28,8 @@ def getPathLists():
     mapPaths = listdir('.\\maps')
     if 'desktop.ini' in mapPaths:
         mapPaths.remove('desktop.ini')
+    if 'README.md' in mapPaths:
+        mapPaths.remove('README.md')
     mapPaths = ['.\\maps\\' + i for i in mapPaths]
     mapPaths.sort(key=path.getctime, reverse=True)
     mapPaths = [i.lstrip('.\\maps\\') for i in mapPaths]
