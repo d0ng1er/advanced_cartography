@@ -1,7 +1,7 @@
 # ADVANCED CARTOGRAPHY 0.9.1
 A Noita mod that creates a map of the world as you play through it.
 
-![banner](examples/banner_compressed.jpg.png)
+![banner](examples/banner_compressed.jpg)
 
 ## System Requirements
 
