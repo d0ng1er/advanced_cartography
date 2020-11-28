@@ -26,15 +26,15 @@ Help me upgrade my gaming toaster:
 
 - Get Noita
 - Download mod (latest release build here: [LINK])
-- Put mod (mod folder should have the name 'advanced-cartography') in your mods folder in Noita
-    - Path is normally "Steam\steamapps\common\Noita\mods\advanced-cartography"
+- Put mod (mod folder should have the name 'advanced_cartography') in your mods folder in Noita
+    - Path is normally "..\Steam\steamapps\common\Noita\mods\advanced-cartography"
 - Open Noita, in "Mods" select "Enable Unsafe Mods" and then enable the AC mod (click on it in the menu)
 - Play the game in windowed mode (fullscreen-windowed only works sometimes). AC will take screenshots as you play.
-- In the mod root folder (advanced-cartography), there is an application called 'Stitcher'. Run that.
+- In the mod root folder (advanced_cartography), there is an application called 'Stitcher'. Run that.
     - It will open a command prompt which will guide you through the process of stitching the screenshots into a full map.
     - If you keep Stitcher open while you play, you will be able to redraw and review the map during the game, allowing you to check for unexplored areas and find items you left behind.
 - Screenshots are saved in the 'raws' folder, drawn maps are stored in the 'maps' folder.
-- Screenshots are automatically scaled to the virtual dimensions of the game (not the resolution of the window, the actual number of pixels that Noita is calculating and displaying). This is done to keep consistent coordinates and keep file sizes manageable.
+- Screenshots are automatically scaled to the virtual dimensions of the game (not the resolution of the window, the actual number of pixels that Noita is calculating and displaying). This is done to maintain consistent coordinates and keep file sizes manageable.
 - Worlds are sorted by seed, and automatically tagged when they are Daily Runs or Daily Practice runs
 - When you die, AC will take a screenshot of the final frame of your life
 - If you enter a New Game +, a new seed folder is created with the appropriate tag, and the old one remains the same

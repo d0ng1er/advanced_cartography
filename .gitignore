@@ -1,6 +1,8 @@
 notable_maps
 raws/**
+!raws/README.md
 maps/**
+!maps/README.md
 stitcher.exe
 __pycache__
 files/stc/build
