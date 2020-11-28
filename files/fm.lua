@@ -48,11 +48,11 @@ function pathMaster(seedstr)
 	if not exists(mapPath) then
         os.execute('mkdir ' .. mapPath)
     end
-    local i = 0
+    local cnt = 0
     local photoPath = ''
     repeat
-        photoPath = rawPath .. i .. '\\'
-        i = i + 1
+        photoPath = rawPath .. cnt .. '\\'
+        cnt = cnt + 1
     until not exists(photoPath)
     os.execute ('mkdir ' .. photoPath)
     if not exists(photoPath) then
@@ -65,18 +65,18 @@ end
 function death()
     --when the player dies, this function gets called
     --and marks the seed dir with [DEAD]
-    local cnt = 2
     if exists(rawPath) then
         local deadPath = '[DEAD]_' .. mapName
         if exists('mods\\advanced_cartography\\raws\\' .. deadPath) then
+            local cnt = 2
             repeat
-                deadPath = '[DEAD_' .. cnt .. 'x]' .. mapName
-                i = i + 1
+                deadPath = '[DEAD' .. cnt .. 'x]_' .. mapName
+                cnt = cnt + 1
             until not exists('mods\\advanced_cartography\\raws\\' .. deadPath)
         end
+        print('AC: Death: map name changed to ' .. deadPath)
         os.execute('rename ' .. rawPath .. ' ' .. deadPath)
         os.execute('rename ' .. mapPath .. ' ' .. deadPath)
-        print('AC: marked Screenshot Directory with [DEAD]')
     else
         print("AC Error: you appear to have died in a world that doesn't exist")
     end

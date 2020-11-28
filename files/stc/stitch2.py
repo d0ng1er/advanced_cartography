@@ -91,7 +91,7 @@ def stitch2(rawPath, destPath='', cropFactor=0.75, featherFactor=0.15):
             piclist.append(pic(paths[k], cropFactor, featherFactor))
     piclist.sort(key=lambda i: i.mtime)
 
-    if rawPath.find('[DEAD]') != -1:
+    if rawPath.find('DEAD') != -1:
         endimg = piclist[-1].getSkull()
     else:
         endimg = piclist[-1].getYAH()
