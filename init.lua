@@ -34,10 +34,10 @@ function takeSShot(vResX, vResY, newCamX, newCamY)
     local fName = cnt .. '_(' .. rCamX .. ',' .. rCamY .. ')' .. '.jpg'
     local fullPath = photoPath .. fName
     if captureWrapper(fullPath, vResX, vResY) then
-        print('AC: took screenshot ' .. fName .. '\n')
+        print('\nAC: took screenshot ' .. fName)
         cnt = cnt + 1
     else
-        print('AC: screenshot failed\n')
+        print('\nAC: screenshot failed')
     end
 end
 
