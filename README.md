@@ -13,7 +13,7 @@ A Noita mod that creates a map of the world as you play through it.
 
 ## Disclaimer
 
-I have no idea what I'm doing. I learned what a pointer is two weeks ago, and had never used Lua, C++, or C prior to this project. This mod has only been tested on one computer, mine. Use at your own risk.
+I have no idea what I'm doing. I learned what a pointer is two weeks ago, and had never used Lua, C++, or C prior to this project. This mod has only been tested on one computer, mine. This is a pre-release. There's at least one significant bug. Use at your own risk.
 
 ## Donations
 
@@ -30,7 +30,7 @@ Help me upgrade my gaming toaster:
     - Path is normally "..\Steam\steamapps\common\Noita\mods\advanced-cartography"
 - Open Noita, in `Mods` select `Enable Unsafe Mods` and then enable the AC mod
 - Play the game in windowed mode (fullscreen-windowed only works sometimes). AC will take screenshots as you play.
-- In the mod root folder there is an application called `stitcher`. Run that.
+- In the mod root folder there is an application called `stitcher`. Run that. It will take some time to load.
     - It will open a command prompt which will guide you through the process of stitching the screenshots into a full map.
     - If you keep stitcher open while you play, you will be able to redraw and review the map during the game, allowing you to check for unexplored areas and find items you left behind.
 - Screenshots are saved in the `raws` folder, drawn maps are stored in the `maps` folder.
