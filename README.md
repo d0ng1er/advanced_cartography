@@ -1,4 +1,4 @@
-# ADVANCED CARTOGRAPHY 0.9.1
+# ADVANCED CARTOGRAPHY
 A Noita mod that creates a map of the world as you play through it.
 
 ![banner](examples/banner_compressed.jpg)
@@ -13,7 +13,7 @@ A Noita mod that creates a map of the world as you play through it.
 
 ## Disclaimer
 
-I have no idea what I'm doing. I learned what a pointer is two weeks ago, and had never used Lua, C++, or C prior to this project. There are many bugs, (known ones being listed further down). It is extremely unpolished. Use at your own risk.
+I have no idea what I'm doing. I learned what a pointer is two weeks ago, and had never used Lua, C++, or C prior to this project. This mod has only been tested on one computer, mine. Use at your own risk.
 
 ## Donations
 
