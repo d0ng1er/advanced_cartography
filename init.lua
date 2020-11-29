@@ -18,13 +18,6 @@ function OnPlayerSpawned(player_entity)
     --    'LuaComponent',
     --    {script_teleported = 'mods/advanced_cartography/scripts/istp.lua'}
     --    )
-    -- death detection not working either, for the same reasons
-    -- may try to fix eventually, but not right now.
-    --EntityAddComponent(
-    --    playerID,
-    --    'LuaComponent',
-    --    {script_death = 'mods/advanced_cartography/files/death.lua'}
-    --    )
 end
 
 

@@ -25,7 +25,7 @@ Help me upgrade my gaming toaster:
 ## Usage
 
 - Get Noita
-- Download mod (latest release build here: [LINK])
+- Download mod ([latest release build here](https://github.com/d0ng1er/advanced_cartography/releases)), get the `ac_x.x.x` zip file not the source code.
 - Unpack mod into your `mods` folder in Noita (path should be `..\Steam\steamapps\common\Noita\mods\advanced-cartography`)
 - Open Noita, in `Mods` select `Enable Unsafe Mods` and then enable the AC mod
 - Play the game in windowed mode (fully-windowed, where you can see the borders, NOT fullscreen-windowed). AC will take screenshots as you play.
