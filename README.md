@@ -13,7 +13,7 @@ A Noita mod that creates a map of the world as you play through it.
 
 ## Disclaimer
 
-I have no idea what I'm doing. I learned what a pointer is two weeks ago, and had never used Lua, C++, or C prior to this project. There are many bugs, (known ones being listed further down). It is extremely unpolished. Do not expect greatness. Do not expect competence. Embrace pain, you will be experiencing a lot of it soon.
+I have no idea what I'm doing. I learned what a pointer is two weeks ago, and had never used Lua, C++, or C prior to this project. There are many bugs, (known ones being listed further down). It is extremely unpolished. Use at your own risk.
 
 ## Donations
 
@@ -26,14 +26,14 @@ Help me upgrade my gaming toaster:
 
 - Get Noita
 - Download mod (latest release build here: [LINK])
-- Put mod (mod folder should have the name 'advanced_cartography') in your mods folder in Noita
+- Put mod (mod folder should have the name `advanced_cartography`) in your mods folder in Noita
     - Path is normally "..\Steam\steamapps\common\Noita\mods\advanced-cartography"
-- Open Noita, in "Mods" select "Enable Unsafe Mods" and then enable the AC mod (click on it in the menu)
+- Open Noita, in `Mods` select `Enable Unsafe Mods` and then enable the AC mod
 - Play the game in windowed mode (fullscreen-windowed only works sometimes). AC will take screenshots as you play.
-- In the mod root folder (advanced_cartography), there is an application called 'Stitcher'. Run that.
+- In the mod root folder there is an application called `stitcher`. Run that.
     - It will open a command prompt which will guide you through the process of stitching the screenshots into a full map.
-    - If you keep Stitcher open while you play, you will be able to redraw and review the map during the game, allowing you to check for unexplored areas and find items you left behind.
-- Screenshots are saved in the 'raws' folder, drawn maps are stored in the 'maps' folder.
+    - If you keep stitcher open while you play, you will be able to redraw and review the map during the game, allowing you to check for unexplored areas and find items you left behind.
+- Screenshots are saved in the `raws` folder, drawn maps are stored in the `maps` folder.
 - Screenshots are automatically scaled to the virtual dimensions of the game (not the resolution of the window, the actual number of pixels that Noita is calculating and displaying). This is done to maintain consistent coordinates and keep file sizes manageable.
 - Worlds are sorted by seed, and automatically tagged when they are Daily Runs or Daily Practice runs
 - When you die, AC will take a screenshot of the final frame of your life
@@ -49,7 +49,7 @@ Help me upgrade my gaming toaster:
 
 Each of these already has a ticket in [issues](https://github.com/d0ng1er/advanced_cartography/issues).
 
-- Teleporting corrupts screenshot coordinates
+- [Teleporting corrupts screenshot coordinates](https://github.com/d0ng1er/advanced_cartography/issues/1)
 - Polymorphing gets counted as death (current fix is to restart the game after polymorphing to continue capturing, then combine the batch folders from each world into one of the seed folders when you want to stitch)
 
 ## Special Thanks
