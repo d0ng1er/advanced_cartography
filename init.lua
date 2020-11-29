@@ -63,7 +63,7 @@ function OnWorldPostUpdate()
         then
             oldCamX, oldCamY = newCamX, newCamY
             takeSShot(vResX, vResY, newCamX, newCamY)
-    elseif not EntityGetIsAlive(playerID)
+    elseif StatsGetValue("dead") == "1"
         and not dead
         then
             dead = true

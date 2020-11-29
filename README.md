@@ -52,7 +52,6 @@ Help me upgrade my gaming toaster:
 Each of these already has a ticket in [issues](https://github.com/d0ng1er/advanced_cartography/issues).
 
 - [Teleporting corrupts screenshot coordinates](https://github.com/d0ng1er/advanced_cartography/issues/1)
-- Polymorphing gets counted as death (current fix is to restart the game after polymorphing to continue capturing, then combine the batch folders from each world into one of the seed folders when you want to stitch)
 
 ## Special Thanks
 
