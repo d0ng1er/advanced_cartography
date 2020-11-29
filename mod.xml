@@ -1,4 +1,5 @@
 <Mod name="Advanced Cartography" 
 	description="Takes screenshots as you play, allowing you to draw a map of your world."
+    tags="quality of life"
 	request_no_api_restrictions="1">
 </Mod>
