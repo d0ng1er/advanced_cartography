@@ -39,6 +39,7 @@ Help me upgrade my gaming toaster:
 - Worlds are sorted by seed, and automatically tagged when they are Daily Runs or Daily Practice runs
 - When you die, AC will take a screenshot of the final frame of your life
 - If you enter a New Game +, a new seed folder is created with the appropriate tag, and the old one remains the same
+- You will have to delete the screenshot and map folders manually, depending on how often you play they can still become very large very fast despite compression.
 
 ## Planned Features
 
