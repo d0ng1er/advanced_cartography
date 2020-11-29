@@ -26,10 +26,9 @@ Help me upgrade my gaming toaster:
 
 - Get Noita
 - Download mod (latest release build here: [LINK])
-- Put mod (mod folder should have the name `advanced_cartography`) in your mods folder in Noita
-    - Path is normally "..\Steam\steamapps\common\Noita\mods\advanced-cartography"
+- Unpack mod into your `mods` folder in Noita (path should be `..\Steam\steamapps\common\Noita\mods\advanced-cartography`)
 - Open Noita, in `Mods` select `Enable Unsafe Mods` and then enable the AC mod
-- Play the game in windowed mode (fullscreen-windowed only works sometimes). AC will take screenshots as you play.
+- Play the game in windowed mode (fully-windowed, where you can see the borders, NOT fullscreen-windowed). AC will take screenshots as you play.
 - In the mod root folder there is an application called `stitcher`. Run that. It will take some time to load.
     - It will open a command prompt which will guide you through the process of stitching the screenshots into a full map.
     - If you keep stitcher open while you play, you will be able to redraw and review the map during the game, allowing you to check for unexplored areas and find items you left behind.

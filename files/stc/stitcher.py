@@ -1,3 +1,9 @@
+# Copyright (c) 2020 Reese Danzer
+
+# This software is released under the MIT License.
+# https://opensource.org/licenses/MIT
+
+
 from inquirer import list_input
 from os import listdir, path
 from subprocess import run, CalledProcessError

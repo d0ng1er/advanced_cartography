@@ -1,3 +1,10 @@
+-- Copyright (c) 2020 Reese Danzer
+
+-- This software is released under the MIT License.
+-- https://opensource.org/licenses/MIT
+
+-- This module supplys the file-management functions to init.lua, specifically creation of output paths, map paths, and tagging of paths, as well as retagging on death
+
 require('os')
 
 --SOURCE

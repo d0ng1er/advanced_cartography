@@ -1,3 +1,9 @@
+# Copyright (c) 2020 Reese Danzer
+
+# This software is released under the MIT License.
+# https://opensource.org/licenses/MIT
+
+
 from os import listdir, path
 from time import sleep, strftime
 from PIL import Image, ImageDraw

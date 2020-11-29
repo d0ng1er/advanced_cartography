@@ -1,5 +1,5 @@
--- Copyright (c) 2019-2020 David Vogel
---
+-- Copyright (c) 2020 Reese Danzer
+
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 

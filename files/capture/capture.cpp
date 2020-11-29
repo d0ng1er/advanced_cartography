@@ -1,3 +1,9 @@
+/* Copyright (c) 2020 Reese Danzer
+//
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
+*/
+
 #include <iostream>
 using namespace std;
 #include <windows.h>
