@@ -43,7 +43,7 @@ def getPathLists():
 
 def stcWrap(pth):
     try:
-        return stitch2.stitch2(pth)
+        return stitch.stitch2(pth)
     except FileNotFoundError:
         print(errstr)
         return 0

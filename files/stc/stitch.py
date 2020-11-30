@@ -77,7 +77,11 @@ class pic:
         return yah
 
 
-def stitch2(rawPath, destPath='', cropFactor=0.75, featherFactor=0.15):
+def stitch2(rawPath,
+            destPath='',
+            cropFactor=0.75,
+            featherFactor=0.15,
+            marks=True):
     piclist = []
     batches = listdir(rawPath)
     cnt = 0
@@ -97,9 +101,9 @@ def stitch2(rawPath, destPath='', cropFactor=0.75, featherFactor=0.15):
             piclist.append(pic(paths[k], cropFactor, featherFactor))
     piclist.sort(key=lambda i: i.mtime)
 
-    if rawPath.find('DEAD') != -1:
+    if rawPath.find('DEAD') != -1 and marks:
         endimg = piclist[-1].getSkull()
-    else:
+    elif marks:
         endimg = piclist[-1].getYAH()
 
     # This next section calculates the bounds of the final map. It
