@@ -1,3 +1,6 @@
 # Capture Function
 
 'capture.dll' provides the screenshot function. It will take a screenshot of whatever window is in focus when called (since captures are triggered by in-game movement, this generally works pretty well). It then shrinks it to the virtual resolution and compresses it to jpg using libjpeg's turbojpeg api. If this isn't done, then the files become too wide for stitcher to handle once you've explored about half the in-game world (assuming your virtual resolution is about 1/3 your window resolution, often it's even less). With this method you get can explore the entire main world and about 1.5 parallel worlds before the image starts needing to be shrunk even more, the files are a lot smaller and faster to write, and the quality loss is minimal.
+
+## capture_mt
+My attempt to make the capture process multithreaded. It doesn't work yet.
