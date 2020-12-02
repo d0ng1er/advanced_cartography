@@ -11,10 +11,6 @@ A Noita mod that creates a map of the world as you play through it.
 - Willingness to play in windowed mode (full windowed, where you can see the borders)
 - Everything else you need to play Noita (in particular, a good CPU)
 
-## Disclaimer
-
-I have no idea what I'm doing. I learned what a pointer is two weeks ago, and had never used Lua, C++, or C prior to this project. This mod has only been tested on one computer, mine. This is a pre-release. There's at least one significant bug. Use at your own risk.
-
 ## Donations
 
 Help me upgrade my gaming toaster:
