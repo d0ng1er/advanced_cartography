@@ -69,6 +69,7 @@ function pathMaster(seedstr)
     return photoPath
 end
 
+
 function death()
     --when the player dies, this function gets called
     --and marks the seed dir with [DEAD]
@@ -87,4 +88,10 @@ function death()
     else
         print("AC Error: you appear to have died in a world that doesn't exist")
     end
+end
+
+
+function delete(path)
+    print('AC: attempting to delete ' .. path)
+    os.execute('del ' .. '"' .. path .. '"')
 end

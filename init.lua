@@ -25,12 +25,12 @@ function takeSShot(vResX, vResY, newCamX, newCamY)
     local rCamX = string.format("%.2f", newCamX)
     local rCamY = string.format("%.2f", newCamY)
     local fName = cnt .. '_(' .. rCamX .. ',' .. rCamY .. ')' .. '.jpg'
-    local fullPath = photoPath .. fName
+    fullPath = photoPath .. fName
     if captureWrapper(fullPath, vResX, vResY) then
-        print('AC: took screenshot ' .. fName .. '\n')
+        print('AC: took screenshot ' .. fName)
         cnt = cnt + 1
     else
-        print('AC: screenshot failed\n')
+        print('AC: screenshot failed')
     end
 end
 
@@ -47,7 +47,11 @@ function OnWorldPostUpdate()
         photoPath = pathMaster(StatsGetValue('world_seed'))
     elseif GlobalsGetValue('justTeleported', '0') ~= '0' then
         num = tonumber(GlobalsGetValue('justTeleported', '0'))
-        GamePrint(num)
+        if num == 30 then
+            delete(fullPath)
+            print('AC: teleport detected, capture disabled, most recent screenshot deleted\n')
+        end
+        print('AC: ' .. num .. ' more frames until capture rearm')
         num = num - 1
         GlobalsSetValue('justTeleported', tostring(num))
         return

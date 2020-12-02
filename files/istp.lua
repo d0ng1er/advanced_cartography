@@ -1,4 +1,8 @@
 function teleported(fx, fy, tx, ty, prtl)
-    GlobalsSetValue('justTeleported', '30')
-    GamePrint(fx .. ', ' .. fy .. ', ' .. tx .. ', ' .. ty .. ', ' .. tostring(prtl) .. ', ')
+    if prtl then
+        GlobalsSetValue('justTeleported', '30')
+    else
+        GlobalsSetValue('justTeleported', '15')
+    end
+    --GamePrint(fx .. ', ' .. fy .. ', ' .. tx .. ', ' .. ty .. ', ' .. tostring(prtl) .. ', ')
 end
