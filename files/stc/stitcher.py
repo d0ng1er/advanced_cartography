@@ -7,15 +7,15 @@
 from inquirer import list_input
 from os import listdir, path
 from subprocess import run, CalledProcessError
-import stitch2
+import stitch
 
 
 rawPaths = []
 mapPaths = []
-outpath = ''
-errstr = ('\nERROR:\nIn the time since this prompt was loaded,',
-          'you appear to have died. Or the file was moved.',
-          'The seed folder should now be updated, look for a',
+outPath = ''
+errstr = ('\nERROR:\nIn the time since this prompt was loaded,' +
+          'you appear to have died. Or the file was moved. ' +
+          'The seed folder should now be updated, look for a ' +
           '[DEAD] tag by the seed name.\n')
 
 
@@ -46,12 +46,14 @@ def stcWrap(pth):
         return stitch.stitch2(pth)
     except FileNotFoundError:
         print(errstr)
+        print(f'Bad Path: {pth}\n')
         return 0
 
 
 def accWrap(pth):
     try:
         run(['start', pth], shell=True, check=True)
+        return 1
     except CalledProcessError:
         print(errstr)
         print(f'Bad Path: {pth}\n')
@@ -114,10 +116,15 @@ def now(pth, exOps):
 
     if nw == 'Redraw this map':
         outPath = stcWrap(pth)
-        naxt(pth)
+        if not outPath:
+            draw()
+        else:
+            naxt(pth)
     elif nw == 'Reopen this map':
-        accWrap(outPath)
-        now(pth)
+        if not accWrap(outPath):
+            omap()
+        else:
+            now(pth)
     else:
         return nw
 
@@ -138,11 +145,16 @@ def naxt(pth, exOps):
         )
 
     if nxt == 'Open this map':
-        accWrap(outPath)
-        now(pth)
+        if not accWrap(outPath):
+            omap()
+        else:
+            now(pth)
     elif nxt == 'Redraw this map':
         outPath = stcWrap(pth)
-        now(pth)
+        if not outPath:
+            draw()
+        else:
+            naxt(pth)
     else:
         return nxt
 
@@ -162,6 +174,7 @@ def omap(mOps):
 
 @extopt('menu')
 def omap2(seed, mOps):
+    global outPath
     maps = []
     try:
         maps = listdir('.\\maps\\' + seed)
@@ -176,11 +189,17 @@ def omap2(seed, mOps):
 
     mtarg = list_input(
         'Select which version you want to view',
-        choices=maps+mOps)
+        choices=maps+['Redraw Map']+mOps)
     if mtarg == 'Exit' or mtarg == 'Main Menu':
         return mtarg
-    accWrap('.\\maps\\' + seed + '\\' + mtarg)
-    menu2()
+    elif mtarg == 'Redraw Map':
+        outPath = stcWrap('.\\raws\\' + seed)
+        if outPath == 0:
+            draw()
+        else:
+            naxt('.\\raws\\' + seed)
+    elif not accWrap('.\\maps\\' + seed + '\\' + mtarg):
+        omap()
 
 
 @extopt('menu')
@@ -195,7 +214,10 @@ def draw(mOps):
         return targ
     pth = '.\\raws\\' + targ
     outPath = stcWrap(pth)
-    naxt(pth)
+    if not outPath:
+        draw()
+    else:
+        naxt(pth)
 
 
 def menu2():
