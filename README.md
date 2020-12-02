@@ -47,12 +47,6 @@ Help me upgrade my gaming toaster:
     - Noita's modding API might not allow this
 - Multithreaded screenshot compression
 
-## Known Bugs
-
-Each of these already has a ticket in [issues](https://github.com/d0ng1er/advanced_cartography/issues).
-
-- [Teleporting corrupts screenshot coordinates](https://github.com/d0ng1er/advanced_cartography/issues/1)
-
 ## Special Thanks
 
 - Inspiration for this project: [Dadido3/noita-mapcap](https://github.com/Dadido3/noita-mapcap)
