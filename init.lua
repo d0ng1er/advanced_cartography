@@ -13,11 +13,11 @@ function OnPlayerSpawned(player_entity)
     ngpcnt = tostring(SessionNumbersGetValue('NEW_GAME_PLUS_COUNT'))
     -- Teleport Detection not yet working, limited heavily
     -- by game disabling mod api post initialization.
-    --EntityAddComponent(
-    --    playerID,
-    --    'LuaComponent',
-    --    {script_teleported = 'mods/advanced_cartography/scripts/istp.lua'}
-    --    )
+    EntityAddComponent(
+        playerID,
+        'LuaComponent',
+        {script_teleported = 'mods/advanced_cartography/files/istp.lua'}
+        )
 end
 
 
@@ -45,9 +45,15 @@ function OnWorldPostUpdate()
     elseif ngp ~= ngpcnt then
         ngpcnt = ngp
         photoPath = pathMaster(StatsGetValue('world_seed'))
+    elseif GlobalsGetValue('justTeleported', '0') ~= '0' then
+        num = tonumber(GlobalsGetValue('justTeleported', '0'))
+        GamePrint(num)
+        num = num - 1
+        GlobalsSetValue('justTeleported', tostring(num))
+        return
     end
 
-    local newCamX, newCamY =GameGetCameraPos()
+    local newCamX, newCamY = GameGetCameraPos()
     local vResX = tonumber(MagicNumbersGetValue('VIRTUAL_RESOLUTION_X'))
     local vResY = tonumber(MagicNumbersGetValue('VIRTUAL_RESOLUTION_Y'))
 
