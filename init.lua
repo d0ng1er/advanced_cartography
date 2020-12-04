@@ -3,23 +3,29 @@ dofile_once('mods/advanced_cartography/files/fm.lua')
 
 
 function OnPlayerSpawned(player_entity)
-    playerID = player_entity
     vResX = tonumber(MagicNumbersGetValue('VIRTUAL_RESOLUTION_X'))
     vResY = tonumber(MagicNumbersGetValue('VIRTUAL_RESOLUTION_Y'))
     oldCamX, oldCamY = 0, 0
     oldCamX, oldCamY = GameGetCameraPos()
-    GlobalsSetValue('deadzone', tostring(ModSettingGet('advanced_cartography.deadzone')))
+    deadzone = ModSettingGet('advanced_cartography.deadzone')
     photoPath = pathMaster(StatsGetValue('world_seed'))
     cnt = 0
     dead = false
     ngpcnt = tostring(SessionNumbersGetValue('NEW_GAME_PLUS_COUNT'))
-    -- Teleport Detection not yet working, limited heavily
-    -- by game disabling mod api post initialization.
     EntityAddComponent(
-        playerID,
+        player_entity,
         'LuaComponent',
         {script_teleported = 'mods/advanced_cartography/files/istp.lua'}
         )
+end
+
+
+-- would like to use OnModSettingsChanged(), but it's not triggering
+function OnPausedChanged(ip, iip)
+    if not ip then
+        deadzone = ModSettingGet('advanced_cartography.deadzone')
+        print('deadzone is now' .. tostring(deadzone))
+    end
 end
 
 
@@ -37,7 +43,7 @@ function takeSShot(newCamX, newCamY)
 end
 
 
-function OnWorldPostUpdate() 
+function OnWorldPostUpdate()
     local ngp = tostring(SessionNumbersGetValue('NEW_GAME_PLUS_COUNT'))
     if GameIsInventoryOpen()
        or not oldCamY
@@ -60,7 +66,6 @@ function OnWorldPostUpdate()
     end
 
     local newCamX, newCamY = GameGetCameraPos()
-    local deadzone = tonumber(GlobalsGetValue('deadzone', '0.25'))
 
     if (((vResX*deadzone) < math.abs(oldCamX - newCamX))
         or ((vResY*deadzone) < math.abs(oldCamY - newCamY)))

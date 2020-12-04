@@ -24,11 +24,6 @@ function mod_setting_bool_custom( mod_id, gui, in_main_menu, im_id, setting )
 end
 
 function mod_setting_change_callback( mod_id, gui, in_main_menu, setting, old_value, new_value  )
-    --yes, this is as horrible as it looks. this callback doesn't actually pass the setting that was changed, so I'm guessing.
-    if type(new_value) == 'number' then
-        GlobalsSetValue('deadzone', tostring(new_value))
-        print('Screenshot deadzone changed to ' .. new_value)
-    end
 end
 
 
@@ -40,9 +35,11 @@ mod_settings =
         id = "deadzone",
         ui_name = "Screenshot Deadzone",
         ui_description = "Distance (% of screen) the camera has to move to trigger a screenshot.\n" ..
-                         "Going over 50% is generally a bad idea.",
+                         "Shorter distance = more screenshots.\n" ..
+                         "Going over 50% is generally a bad idea.\n" ..
+                         "Right click to reset to default.",
         value_default = 0.25,
-        value_min = 0.05,
+        value_min = 0.01,
         value_max = 0.99,
         value_display_multiplier = 100,
         value_display_formatting = " $0%",
