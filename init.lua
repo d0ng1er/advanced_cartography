@@ -4,9 +4,11 @@ dofile_once('mods/advanced_cartography/files/fm.lua')
 
 function OnPlayerSpawned(player_entity)
     playerID = player_entity
+    vResX = tonumber(MagicNumbersGetValue('VIRTUAL_RESOLUTION_X'))
+    vResY = tonumber(MagicNumbersGetValue('VIRTUAL_RESOLUTION_Y'))
     oldCamX, oldCamY = 0, 0
     oldCamX, oldCamY = GameGetCameraPos()
-    _G.isTeleporting = false
+    GlobalsSetValue('deadzone', tostring(ModSettingGet('advanced_cartography.deadzone')))
     photoPath = pathMaster(StatsGetValue('world_seed'))
     cnt = 0
     dead = false
@@ -21,7 +23,7 @@ function OnPlayerSpawned(player_entity)
 end
 
 
-function takeSShot(vResX, vResY, newCamX, newCamY)
+function takeSShot(newCamX, newCamY)
     local rCamX = string.format("%.2f", newCamX)
     local rCamY = string.format("%.2f", newCamY)
     local fName = cnt .. '_(' .. rCamX .. ',' .. rCamY .. ')' .. '.jpg'
@@ -58,20 +60,19 @@ function OnWorldPostUpdate()
     end
 
     local newCamX, newCamY = GameGetCameraPos()
-    local vResX = tonumber(MagicNumbersGetValue('VIRTUAL_RESOLUTION_X'))
-    local vResY = tonumber(MagicNumbersGetValue('VIRTUAL_RESOLUTION_Y'))
+    local deadzone = tonumber(GlobalsGetValue('deadzone', '0.25'))
 
-    if (((vResX*0.25) < math.abs(oldCamX - newCamX))
-        or ((vResY*0.25) < math.abs(oldCamY - newCamY)))
+    if (((vResX*deadzone) < math.abs(oldCamX - newCamX))
+        or ((vResY*deadzone) < math.abs(oldCamY - newCamY)))
         then
             oldCamX, oldCamY = newCamX, newCamY
-            takeSShot(vResX, vResY, newCamX, newCamY)
+            takeSShot(newCamX, newCamY)
     elseif StatsGetValue("dead") == "1"
         and not dead
         then
             dead = true
             oldCamX, oldCamY = newCamX, newCamY
-            takeSShot(vResX, vResY, newCamX, newCamY)
+            takeSShot(newCamX, newCamY)
             death()
     end
 end
