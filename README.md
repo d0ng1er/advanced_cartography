@@ -30,7 +30,7 @@ Help me upgrade my gaming toaster:
     - If you keep stitcher open while you play, you will be able to redraw and review the map during the game, allowing you to check for unexplored areas and find items you left behind.
 - Screenshots are saved in the `raws` folder, drawn maps are stored in the `maps` folder.
 - Screenshots are automatically scaled to the virtual dimensions of the game (not the resolution of the window, the actual number of pixels that Noita is calculating and displaying). This is done to maintain consistent coordinates and keep file sizes manageable. **For the best results, your real resolution should be a multiple of your virtual resolution**.
-    - Virtual resolution can be found by looking at the games' `Magic Numbers` in an unpacked `data` file. If you don't know what that means, don't worry about it, the quality will still be fine. In the future I may try implementing a mod setting to change virtual resolution in-game.
+    - Virtual resolution can be found by looking at the games' `Magic Numbers` in an unpacked `data` file. If you don't know what that means, don't worry about it, the quality will still be fine. 
 - Worlds are sorted by seed, and automatically tagged when they are Daily Runs or Daily Practice runs
 - When you die, AC will take a screenshot of the final frame of your life
 - If you enter a New Game +, a new seed folder is created with the appropriate tag, and the old one remains the same
