@@ -148,7 +148,7 @@ def stitch2(rawPath,
                 round(i.coords[1] - yCoordMin))
         bigMap.paste(i.cim, targ, i.getFMask())
         i.closePIL()
-        if piclist.index(i) == (len(piclist)-1):
+        if piclist.index(i) == (len(piclist)-1) and marks:
             bigMap.paste(endimg, targ, endimg)  # Looks like shit
             endimg.close()
 

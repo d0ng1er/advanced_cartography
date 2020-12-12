@@ -4,7 +4,7 @@
 # https://opensource.org/licenses/MIT
 
 
-from inquirer import list_input
+from inquirer import list_input, text, confirm
 from os import listdir, path
 from subprocess import run, CalledProcessError
 import stitch
@@ -44,6 +44,56 @@ def getPathLists():
 def stcWrap(pth):
     try:
         return stitch.stitch2(pth)
+    except FileNotFoundError:
+        print(errstr)
+        print(f'Bad Path: {pth}\n')
+        return 0
+
+
+def aStcWrap(pth):
+    """Advanced mode is pretty trash
+    """
+    print('\nAdvanced Stitch\n---------------')
+    print('Leaving fields blank will result in defaults being used')
+    print('WARNING: The entry fields are finicky, and capture ALL input. ' +
+          'If you try to use backspace, the value will be rejected.')
+    print(f'Drawing from {pth}\n')
+
+    cF = text('Desired Crop Factor (num 0.01 - 1, def 0.75)')
+    if not cF:
+        cF = 0.75
+    try:
+        cF = float(cF)
+    except ValueError:
+        print('Value entered is not a number, using default')
+        cF = 0.75
+    if cF > 1 or cF < 0.01:
+        print('Value entered is outside acceptable range, using default')
+        cF = 0.75
+    print(f'Crop Factor is {cF}\n')
+
+    fF = text('Desired Feather Radius (num 0.01 - 1, def 0.15)')
+    if not fF:
+        fF = 0.15
+    try:
+        fF = float(fF)
+    except ValueError:
+        print('Value entered is not a number, using default')
+        fF = 0.15
+    if fF > 1 or fF < 0.01:
+        print('Value entered is outside acceptable range, using default')
+        fF = 0.15
+    print(f'Feather Radius is {fF}\n')
+
+    icon = confirm('Mark player position?', default=True)
+    print(f'Mark Player = {icon}\n')
+
+    try:
+        return stitch.stitch2(pth,
+                              '',
+                              cF,
+                              fF,
+                              icon)
     except FileNotFoundError:
         print(errstr)
         print(f'Bad Path: {pth}\n')
@@ -111,8 +161,11 @@ def now(pth, exOps):
 
     nw = list_input(
         'What next?',
-        choices=['Redraw this map', 'Reopen this map']+exOps
-        )
+        choices=['Redraw this map',
+                 'Reopen this map',
+                 'Redraw this map in Advanced Mode'
+                 ]+exOps
+                    )
 
     if nw == 'Redraw this map':
         outPath = stcWrap(pth)
@@ -125,6 +178,12 @@ def now(pth, exOps):
             omap()
         else:
             now(pth)
+    elif nw == 'Redraw this map in Advanced Mode':
+        outPath = aStcWrap(pth)
+        if not outPath:
+            draw()
+        else:
+            naxt(pth)
     else:
         return nw
 
@@ -141,8 +200,11 @@ def naxt(pth, exOps):
 
     nxt = list_input(
         'What next?',
-        choices=['Open this map', 'Redraw this map']+exOps
-        )
+        choices=['Open this map',
+                 'Redraw this map',
+                 'Redraw this map in Advanced Mode'
+                 ]+exOps
+                     )
 
     if nxt == 'Open this map':
         if not accWrap(outPath):
@@ -151,6 +213,12 @@ def naxt(pth, exOps):
             now(pth)
     elif nxt == 'Redraw this map':
         outPath = stcWrap(pth)
+        if not outPath:
+            draw()
+        else:
+            naxt(pth)
+    elif nxt == 'Redraw this map in Advanced Mode':
+        outPath = aStcWrap(pth)
         if not outPath:
             draw()
         else:
@@ -192,14 +260,16 @@ def omap2(seed, mOps):
         choices=maps+['Redraw Map']+mOps)
     if mtarg == 'Exit' or mtarg == 'Main Menu':
         return mtarg
-    elif mtarg == 'Redraw Map':
+    elif mtarg == 'Redraw Map (simple mode only)':
         outPath = stcWrap('.\\raws\\' + seed)
-        if outPath == 0:
+        if not outPath:
             draw()
         else:
             naxt('.\\raws\\' + seed)
     elif not accWrap('.\\maps\\' + seed + '\\' + mtarg):
         omap()
+    else:
+        now('.\\raws\\' + seed)
 
 
 @extopt('menu')
@@ -213,11 +283,19 @@ def draw(mOps):
     if targ == 'Exit' or targ == 'Main Menu':
         return targ
     pth = '.\\raws\\' + targ
-    outPath = stcWrap(pth)
-    if not outPath:
-        draw()
+    adv = confirm('Use Advanced Mode?', default=False)
+    if adv:
+        outPath = aStcWrap(pth)
+        if not outPath:
+            draw()
+        else:
+            naxt(pth)
     else:
-        naxt(pth)
+        outPath = stcWrap(pth)
+        if not outPath:
+            draw()
+        else:
+            naxt(pth)
 
 
 def menu2():
