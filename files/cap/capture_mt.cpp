@@ -124,13 +124,14 @@ VOID WINAPI compressfunc(
         CloseHandle(hFile);
         tjFree(jpegBuf);
         tjDestroy(compressor);
+        free(imgvoid);
 }
 
 
 // ADAPTED FROM:
 // https://stackoverflow.com/questions/11705844/win32-create-bitmap-from-device-context-to-file-and-or-blob
 extern "C" {
-    __declspec(dllexport) bool capture(
+    __declspec(dllexport) void capture(
             const char *path,
             const int vResX,
             const int vResY )
@@ -139,7 +140,7 @@ extern "C" {
         HDC hdcMemDC = NULL;
         HBITMAP hbmScreen = NULL;
         BITMAP bmpScreen;
-        imgQueueItem img;
+        imgQueueItem imgs;
 
         HWND gameWnd = GetForegroundWindow();
         //yes, this is terrible, for now I don't care.
@@ -153,7 +154,7 @@ extern "C" {
         if(!hdcMemDC)
         {
             cerr << "AC Error: unable to initialize compatible device context\n";
-            goto fail;
+            goto done;
         }
         RECT rcClient;
         GetClientRect(gameWnd, &rcClient);
@@ -164,7 +165,7 @@ extern "C" {
         if(!hbmScreen)
         {
             cerr << "AC Error: unable to initialize compatible bitmap\n";
-            goto fail;
+            goto done;
         }
 
         SetStretchBltMode(hdcMemDC, COLORONCOLOR);
@@ -180,7 +181,7 @@ extern "C" {
                     SRCCOPY ))
         {
             cerr << "AC Error: unable to transform bitmap\n";
-            goto fail;
+            goto done;
         }
         GetObject(hbmScreen,sizeof(BITMAP),&bmpScreen);
 
@@ -207,7 +208,7 @@ extern "C" {
         if(!hDIB)
         {
             cerr << "AC Error: bmp heap creation failed\n";
-            goto fail;
+            goto done;
         }
 
         char *lpbitmap = (char *)HeapAlloc(hDIB, 0, dwBmpSize);    
@@ -215,7 +216,7 @@ extern "C" {
         {
             cerr << "AC Error: bmp heap allocation failed\n";
             HeapDestroy(hDIB);
-            goto fail;
+            goto done;
         }       
         // Gets the "bits" from the bitmap and copies them into a buffer 
         // which is pointed to by lpbitmap.
@@ -225,25 +226,27 @@ extern "C" {
                   (BITMAPINFO *)&bi, DIB_RGB_COLORS);
         
         PTP_WORK_CALLBACK work = compressfunc;
-        img = {path, (const unsigned char*)lpbitmap, bmpScreen, hDIB};
+        imgs = {path, (const unsigned char*)lpbitmap, bmpScreen, hDIB};
+        unsigned int size = sizeof(imgs);
+        PVOID img = malloc(size);
+        if(!img)
+        {
+            cerr << "AC Error: image data structure allocation failed.";
+            goto done;
+        }
+        memmove(img, (const void*)&imgs, size);
 
-        PTP_WORK wk = CreateThreadpoolWork(work, (PVOID)&img, nullptr);
+        PTP_WORK wk = CreateThreadpoolWork(work, img, nullptr);
         if(!wk)
         {
             cerr << "AC Error: work allocation failed\n";
-            goto fail;
+            goto done;
         }
         SubmitThreadpoolWork(wk);
         
-        //Clean up
-        DeleteObject(hbmScreen);
-        DeleteObject(hdcMemDC);
-        ReleaseDC(gameWnd,hdcWindow);
-        return true;
-
-        fail:
+        done:
             DeleteObject(hbmScreen);
             DeleteObject(hdcMemDC);
             ReleaseDC(gameWnd,hdcWindow);
-            return false;   }
+    }
 }
