@@ -65,7 +65,7 @@ extern "C" {
         if(!hdcMemDC)
         {
             cerr << "AC Error: unable to initialize compatible device context\n";
-            goto fail;
+            goto done;
         }
         RECT rcClient;
         GetClientRect(gameWnd, &rcClient);
@@ -76,7 +76,7 @@ extern "C" {
         if(!hbmScreen)
         {
             cerr << "AC Error: unable to initialize compatible bitmap\n";
-            goto fail;
+            goto done;
         }
 
         SetStretchBltMode(hdcMemDC, COLORONCOLOR);
@@ -92,7 +92,7 @@ extern "C" {
                     SRCCOPY ))
         {
             cerr << "AC Error: unable to transform bitmap\n";
-            goto fail;
+            goto done;
         }
         GetObject(hbmScreen,sizeof(BITMAP),&bmpScreen);
 
@@ -119,7 +119,7 @@ extern "C" {
         if(!hDIB)
         {
             cerr << "AC Error: bmp heap creation failed\n";
-            goto fail;
+            goto done;
         }
 
         char *lpbitmap = (char *)HeapAlloc(hDIB, 0, dwBmpSize);    
@@ -127,7 +127,7 @@ extern "C" {
         {
             cerr << "AC Error: bmp heap allocation failed\n";
             HeapDestroy(hDIB);
-            goto fail;
+            goto done;
         }       
         // Gets the "bits" from the bitmap and copies them into a buffer 
         // which is pointed to by lpbitmap.
@@ -158,7 +158,7 @@ extern "C" {
         {
             tjFree(jpegBuf);
             cerr << tjGetErrorStr();
-            goto fail;
+            goto done;
         }
 
         // Make a file and write the JPG in
@@ -172,7 +172,7 @@ extern "C" {
         {
             cerr << "AC Error: file initialization error\n";
             CloseHandle(hFile);
-            goto fail;
+            goto done;
         }
 
         DWORD dwBytesWritten = 0;
@@ -184,7 +184,7 @@ extern "C" {
         {
             cerr << "AC Error: file write error\n";
             CloseHandle(hFile);
-            goto fail;
+            goto done;
         }
 
         //Unlock and Free the DIB from the heap
@@ -196,14 +196,7 @@ extern "C" {
         //free jpeg buffer
         tjFree(jpegBuf);
 
-        //Clean up
-        DeleteObject(hbmScreen);
-        DeleteObject(hdcMemDC);
-        ReleaseDC(gameWnd,hdcWindow);
-        tjDestroy(compressor);
-        return true;
-
-        fail:
+        done:
             DeleteObject(hbmScreen);
             DeleteObject(hdcMemDC);
             ReleaseDC(gameWnd,hdcWindow);

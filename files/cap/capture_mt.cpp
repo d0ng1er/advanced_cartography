@@ -12,9 +12,10 @@ using namespace std;
 #include "turbojpeg.h"
 #pragma comment(lib, "turbojpeg-static.lib")
 
-//#define _WIN32_WINNT 0x0600
 
-
+PTP_POOL tPool;
+TP_CALLBACK_ENVIRON env;
+PTP_CALLBACK_ENVIRON pcbe = &env;
 struct imgQueueItem
 {
     const char* path;
@@ -33,17 +34,23 @@ extern "C" {
         switch( fdwReason ) 
         { 
             case DLL_PROCESS_ATTACH:
-                /*PTP_POOL tPool = CreateThreadpool(NULL);
+                tPool = CreateThreadpool(NULL);
                 if(!tPool)
                 {
                     cerr << "AC Error: failed to create threadpool\n";
                     break;
                 }
-                SetThreadPoolThreadMinimum(tPool, 2)
-                SetThreadPoolThreadMaximum(tPool, 20)*/
-                //creating a threadpool might not be necessary,
-                //it might just be fine running on default
+                SetThreadpoolThreadMinimum(tPool, 2);
+                SetThreadpoolThreadMaximum(tPool, 20);
+                cout << "\nAC: compression threadpool initialized\n";
 
+                InitializeThreadpoolEnvironment(pcbe);
+                if(!pcbe)
+                {
+                    cerr << "AC Error: failed to initialize threadpool environment\n";
+                    break;
+                }
+                SetThreadpoolCallbackPool(pcbe, tPool);
                 break;
 
             case DLL_THREAD_ATTACH:
@@ -53,6 +60,10 @@ extern "C" {
                 break;
 
             case DLL_PROCESS_DETACH:
+                CloseThreadpool(tPool);
+                cout << "AC: compression threadpool closed\n";
+                DestroyThreadpoolEnvironment(pcbe);
+                cout << "AC: threadpool environment closed\n";
                 break;
         }
         return true;
@@ -236,7 +247,7 @@ extern "C" {
         }
         memmove(img, (const void*)&imgs, size);
 
-        PTP_WORK wk = CreateThreadpoolWork(work, img, nullptr);
+        PTP_WORK wk = CreateThreadpoolWork(work, img, pcbe);
         if(!wk)
         {
             cerr << "AC Error: work allocation failed\n";

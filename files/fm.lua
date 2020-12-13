@@ -3,9 +3,10 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
--- This module supplys the file-management functions to init.lua, specifically creation of output paths, map paths, and tagging of paths, as well as retagging on death
-
-require('os')
+-- This module supplys the file-management functions to init.lua,
+-- specifically: creation of output paths, map paths, and tagging of paths,
+-- as well as retagging on death. These functions will only work if
+-- they were initialized on startup while the noita api was still available.
 
 --SOURCE
 --https://stackoverflow.com/questions/1340230/check-if-directory-exists-in-lua

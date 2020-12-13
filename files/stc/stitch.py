@@ -130,7 +130,7 @@ def stitch2(rawPath,
     mapWidth = round(xCoordMax - xCoordMin) + xMaxPad + xMinPad
     mapHeight = round(yCoordMax - yCoordMin) + yMaxPad + yMinPad
     print(f'\nYou have explored an area {mapWidth} pixels wide '
-          f'and {mapHeight} pixels tall.')
+          f'and {mapHeight} pixels deep.')
     if mapWidth > 65535 or mapHeight > 65535:
         ratio = 65535 / max(mapWidth, mapHeight)
         mapWidth = floor(mapWidth*ratio-10)  # subtract 10 just to be sure

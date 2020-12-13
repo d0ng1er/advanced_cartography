@@ -34,9 +34,12 @@ function takeSShot(newCamX, newCamY)
     local rCamY = string.format("%.2f", newCamY)
     local fName = cnt .. '_(' .. rCamX .. ',' .. rCamY .. ')' .. '.jpg'
     fullPath = photoPath .. fName
+    print('AC: taking screenshot ' .. fName)
+    --time = os.clock()
     captureWrapper(fullPath, vResX, vResY)
-        print('AC: took screenshot ' .. fName)
-        cnt = cnt + 1
+    --print('AC: screenshot completed, elapsed time: ' .. os.clock()-time .. '\n')
+    cnt = cnt + 1
+
 end
 
 
