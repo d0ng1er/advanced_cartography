@@ -139,8 +139,8 @@ def stitch2(rawPath,
         print(f"That's too many, downscaling to {round(ratio, 3)*100}%.\n")
         print('Limit is 65535px on either axis.\n')
 
-    bigMap = Image.new('RGB', (mapWidth, mapHeight), color=0)
     print('Making canvas')
+    bigMap = Image.new('RGB', (mapWidth, mapHeight), color=0)
     for i in piclist:
         print(f'Applying image {piclist.index(i)+1} of {len(piclist)}',
               end='\r')
