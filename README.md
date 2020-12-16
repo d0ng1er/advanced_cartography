@@ -38,10 +38,10 @@ Help me upgrade my gaming toaster:
 
 ## Planned Features
 
-- Mod settings which allow you to control size of screenshot deadzone, file management behavior for multiple runs on the same seed, etc. 
-- Advanced stitch function, integration with mod GUI (stitch and view maps from the pause menu, instead of an external .exe)
+- ~~Mod setting which allows you to control size of screenshot deadzone.~~ 
+- ~~Advanced stitch function~~, integration with mod GUI (stitch and view maps from the pause menu, instead of an external .exe)
     - Noita's modding API might not allow this
-- Multithreaded screenshot compression
+- ~~Multithreaded screenshot compression~~
 
 ## Special Thanks
 
