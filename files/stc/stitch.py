@@ -59,22 +59,22 @@ class pic:
         self.cim.close()
 
     def getSkull(self):
-        """returns a semi-transparent 8-bit image (skull) resized to
-        PIL object. For use on last pic in list when fPath is marked
+        """adds a semi-transparent 8-bit image (skull) to cropped
+        PIL image. For use on last pic in list when fPath is marked
         with [DEAD]
         """
         skull = Image.open('.\\files\\gfx\\skull.png')
         skull = skull.resize(self.cSize)
-        return skull
+        self.cim.paste(skull, mask=skull)
 
     def getYAH(self):
         """adds a semi-transparent 8-bit image ("you are here" marker)
-        resized to PIL object. For use on last pic in list when fPath
+        to cropped PIL image. For use on last pic in list when fPath
         is NOT marked with [DEAD]
         """
         yah = Image.open('.\\files\\gfx\\yah.png')
         yah = yah.resize(self.cSize)
-        return yah
+        self.cim.paste(yah, mask=yah)
 
 
 def stitch2(rawPath,
@@ -97,14 +97,14 @@ def stitch2(rawPath,
 
         for k in range(len(names)):
             cnt += 1
-            print(f'Images Found: {cnt}', end='\r')
+            print(f'Images found: {cnt}', end='\r')
             piclist.append(pic(paths[k], cropFactor, featherFactor))
     piclist.sort(key=lambda i: i.mtime)
 
     if rawPath.find('DEAD') != -1 and marks:
-        endimg = piclist[-1].getSkull()
+        piclist[-1].getSkull()
     elif marks:
-        endimg = piclist[-1].getYAH()
+        piclist[-1].getYAH()
 
     # This next section calculates the bounds of the final map. It
     # may run into trouble in the future with image overwrites, as
@@ -137,20 +137,17 @@ def stitch2(rawPath,
         mapHeight = floor(mapWidth*ratio-10)
         sleep(1)
         print(f"That's too many, downscaling to {round(ratio, 3)*100}%.\n")
-        print('Current limit is 65535px on either axis, future versions '
-              "hopefully won't have this limitation.\n")
+        print('Limit is 65535px on either axis.\n')
 
     bigMap = Image.new('RGB', (mapWidth, mapHeight), color=0)
+    print('Making canvas')
     for i in piclist:
-        print(f'Adding Image {piclist.index(i)+1} of {len(piclist)}',
+        print(f'Applying image {piclist.index(i)+1} of {len(piclist)}',
               end='\r')
         targ = (round(i.coords[0] - xCoordMin),
                 round(i.coords[1] - yCoordMin))
         bigMap.paste(i.cim, targ, i.getFMask())
         i.closePIL()
-        if piclist.index(i) == (len(piclist)-1) and marks:
-            bigMap.paste(endimg, targ, endimg)  # Looks like shit
-            endimg.close()
 
     # Main thread to save map
     saver = Thread(
@@ -159,7 +156,8 @@ def stitch2(rawPath,
             kwargs={'subsampling': 0, 'quality': 100})
 
     def fEllipsis():
-        """makes the ellipsis move while file is being saved
+        """makes the ellipsis move while file is being saved, so user
+        doesn't get bored.
         """
         print('\n', end='\r')
         while saver.is_alive():
