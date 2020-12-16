@@ -32,6 +32,11 @@ mod_settings_version = 1 -- This is a magic global that can be used to migrate s
 mod_settings = 
 {
     {
+        id = "instructions",
+        ui_name = 'To create maps, run "stitcher.exe", found in the AC mod folder.',
+        not_setting = true,
+    },
+    {
         id = "deadzone",
         ui_name = "Screenshot Deadzone",
         ui_description = "Distance (% of screen) the camera has to move to trigger a screenshot.\n" ..
