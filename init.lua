@@ -33,10 +33,10 @@ function takeSShot(newCamX, newCamY)
     local rCamX = string.format("%.2f", newCamX)
     local rCamY = string.format("%.2f", newCamY)
     local fName = cnt .. '_(' .. rCamX .. ',' .. rCamY .. ')' .. '.jpg'
-    fullPath = photoPath .. fName
+    lastpath = photoPath .. fName
     print('AC: taking screenshot ' .. fName)
     --time = os.clock()
-    captureWrapper(fullPath, vResX, vResY)
+    captureWrapper(lastpath, vResX, vResY)
     --print('AC: screenshot completed, elapsed time: ' .. os.clock()-time .. '\n')
     cnt = cnt + 1
 
@@ -54,9 +54,9 @@ function OnWorldPostUpdate()
         ngpcnt = ngp
         photoPath = pathMaster(StatsGetValue('world_seed'))
     elseif GlobalsGetValue('justTeleported', '0') ~= '0' then
-        num = tonumber(GlobalsGetValue('justTeleported', '0'))
+        local num = tonumber(GlobalsGetValue('justTeleported', '0'))
         if num == 30 then
-            delete(fullPath)
+            delete(lastpath)
             print('AC: teleport detected, capture disabled, most recent screenshot deleted\n')
         end
         print('AC: ' .. num .. ' more frames until capture rearm')
