@@ -8,7 +8,7 @@ A Noita mod that creates a map of the world as you play through it.
 - Windows 8.1 or newer, 64 bit
 - Extra hard drive space to store images and maps (must be same drive you have Noita on)
 - 4 GB or more of RAM
-- Willingness to play in windowed mode (full windowed, where you can see the borders)
+- Willingness to play in windowed mode (real windowed, where you can see the borders)
 - Everything else you need to play Noita (in particular, a good CPU)
 
 ## Donations
